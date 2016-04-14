@@ -1,0 +1,261 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://apply.td.com",
+    "type": "object",
+    "properties": {
+        "firstName": {
+            "id": "http://apply.td.com/svcPersonalInfoSubmitRq/firstName",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20,
+            "pattern": "^[-'a-zA-Z ]*$"
+        },
+        "lastName": {
+            "id": "http://apply.td.com/svcPersonalInfoSubmitRq/lastName",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20,
+            "pattern": "^[-'a-zA-Z ]*$"
+        },
+        "dateOfBirth": {
+            "id": "http://apply.td.com/svcPersonalInfoSubmitRq/dateOfBirth",
+            "type": "object",
+            "properties": {
+                "day": {
+                    "id": "http://apply.td.com/svcPersonalInfoSubmitRq/dateOfBirth/day",
+                    "type": "integer",
+                    "required": true,
+                    "minimum": 1,
+                    "maximum": 31
+                },
+                "month": {
+                    "id": "http://apply.td.com/svcPersonalInfoSubmitRq/dateOfBirth/month",
+                    "type": "string",
+                    "required": true,
+                    "minLength": 1,
+                    "enum": [
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec"
+                    ]
+                },
+                "year": {
+                    "id": "http://apply.td.com/svcPersonalInfoSubmitRq/dateOfBirth/year",
+                    "type": "integer",
+                    "required": true,
+                    "minLength": 1,
+                    "minimum": 1901
+                }
+            }
+        },
+        "socialInsuranceNumber": {
+            "id": "http://apply.td.com/svcPersonalInfoSubmitRq/socialInsuranceNumber",
+            "type": "string",
+            "pattern": "^(7[89]{1}\\d{1}\\d{2}\\d{4}|73[4-9]\\d{2}\\d{4}|74[0-9]\\d{2}\\d{4}|77[3-9]\\d{2}\\d{4}|[89]{1}\\d{2}\\d{2}\\d{4}|(?!000)(?!666)\\d{3}(?!00)\\d{2}(?!0000)\\d{4})$"
+        },
+        "address": {
+            "id": "http://apply.td.com/svcPersonalInfoSubmitRq/address",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+        },
+        "phoneNumber": {
+            "id": "http://apply.td.com/svcPersonalInfoSubmitRq/phoneNumber",
+            "type": "string",
+            "pattern":"^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$"
+        },
+        "email": {
+            "id": "http://apply.td.com/svcPersonalInfoSubmitRq/email",
+            "type": "string",
+            "pattern": "^[-a-z0-9~!$%^&*_=+}{\\'?]+(\\.[-a-z0-9~!$%^&*_=+}{\\'?]+)*@([a-z0-9_][-a-z0-9_]*(\\.[-a-z0-9_]+)*\\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})?$",
+            "minLength": 1
+        },
+        "employerName": {
+            "id": "http://apply.td.com/svcPersonalInfoSubmitRq/employerName",
+            "type": "string",
+             "minLength": 1
+        },
+        "employerAddress": {
+            "id": "http://apply.td.com/svcPersonalInfoSubmitRq/employerAddress",
+            "type": "string",
+             "minLength": 1,
+             "maxLength":40
+        },
+        "employerPhoneNumber": {
+            "id": "http://apply.td.com/svcPersonalInfoSubmitRq/employerPhoneNumber",
+            "type": "string",
+            "pattern":"^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$"
+        },
+        "annualIncome": {
+            "id": "http://apply.td.com/svcPersonalInfoSubmitRq/annualIncome",
+            "type": "number"
+        }
+    },
+    "required": [
+        "firstName",
+        "lastName",
+        "dateOfBirth",
+        "address",
+        "phoneNumber",
+        "email",
+        "employerAddress",
+        "employerName",
+        "employerPhoneNumber",
+        "annualIncome"
+    ]   
+  },
+  "form": [
+    {
+      "type": "template",
+      "template": "<h1 id='personalInfoSection'>Personal Information</h1>"
+    },
+    {
+      "key": "firstName",
+      "title": "First Name: *"
+    },
+    {
+      "key": "lastName",
+      "title": "Last Name: *"
+    },
+    {
+      "type": "section",
+      "htmlClass": "row",
+      "items": [
+        {
+          "type": "section",
+          "htmlClass": "col-xs-4",
+          "items": [
+            {
+              "key": "dateOfBirth.day",
+              "title": "Day: *"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "htmlClass": "col-xs-4",
+          "items": [
+            {
+              "key": "dateOfBirth.month",
+              "title": "Month: *"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "htmlClass": "col-xs-4",
+          "items": [
+            {
+              "key": "dateOfBirth.year",
+              "title": "Year: *"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "socialInsuranceNumber",
+      "title": "Social Insurance Number (Recommended):"
+    },
+    {
+      "type": "button",
+      "style": "btn-info",
+      "title": "Next",
+      "onClick": "goToSection('addressInfoSection')"
+    },
+    {
+      "type": "template",
+      "template": "<h1 id='addressInfoSection'>Address Information</h1>"
+    },
+    {
+      "key": "address",
+      "title": "Street Address: *"
+    },
+    {
+      "type": "button",
+      "style": "btn-info",
+      "title": "Next",
+      "onClick": "goToSection('contactInfoSection')"
+    },
+    {
+      "type": "template",
+      "template": "<h1 id='contactInfoSection'>Contact Information</h1>"
+    },
+    {
+      "key": "phoneNumber",
+      "title": "Mobile Phone: *"
+    },
+    {
+      "key": "email",
+      "title": "E-Mail: *"
+    },
+    {
+      "type": "button",
+      "style": "btn-info",
+      "title": "Next",
+      "onClick": "goToSection('employerInfoSection')"
+    },
+    {
+      "type": "template",
+      "template": "<h1 id='employerInfoSection'>Employer Information</h1>"
+    },
+    {
+      "key": "employerName",
+      "title": "Employer Name: *"
+    },
+    {
+      "key": "employerPhoneNumber",
+      "title": "Work Phone: *"
+    },
+    {
+      "key": "employerAddress",
+      "title": "Employer Address: *"
+    },
+    {
+      "type": "button",
+      "style": "btn-info",
+      "title": "Next",
+      "onClick": "goToSection('financialInfoSection')"
+    },
+    {
+      "type": "template",
+      "template": "<h1 id='financialInfoSection'>Financial Information</h1>"
+    },
+    {
+      "key": "annualIncome",
+      "title": "Annual Income: *"
+    },
+    {
+      "type": "submit",
+      "style": "btn-info",
+      "title": "Next"
+    }
+  ],
+  "model": {
+    "firstName": "First",
+    "lastName": "Last",
+    "dateOfBirth": {
+      "day": 1,
+      "month": "Jan",
+      "year": 1999
+    },
+    "socialInsuranceNumber": "123456789",
+    "address": "1 Yonge St",
+    "phoneNumber": "4161234567",
+    "email": "fl@td.com",
+    "employerName": "TD",
+    "employerPhoneNumber": "4163456789",
+    "employerAddress": "1 Yonge St",
+    "annualIncome": 10000
+  }
+}
